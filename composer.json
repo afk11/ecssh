@@ -1,0 +1,32 @@
+{
+  "name": "afk11/ecsshkey",
+  "type": "application",
+  "description": "Utility to manage multiple git deploy keys",
+  "keywords": ["ssh","git","github","deploy", "ecdsa", "phpecc"],
+  "license": "Unlicense",
+  "authors": [
+    {
+      "name": "Thomas Kerin",
+      "email": "me@thomaskerin.io",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "mdanter/ecc": "~0.3",
+    "paragonie/random_compat": "~2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.3",
+    "squizlabs/php_codesniffer": "~2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Afk11\\EcSSH\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Afk11\\EcSSH\\Tests\\": "tests"
+    }
+  }
+}
