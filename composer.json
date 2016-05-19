@@ -1,5 +1,5 @@
 {
-  "name": "afk11/ecsshkey",
+  "name": "afk11/ecssh",
   "type": "application",
   "description": "Utility to manage elliptic curve ssh keys",
   "keywords": ["ssh","git","github","deploy", "ecdsa", "phpecc"],
