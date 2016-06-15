@@ -13,3 +13,5 @@ This is the encoding used for authentication (authorized_keys, Github, etc).
 
 It is recommended to use the `Curves` class to create a Generator. 
 It uses the curve names supported by SSH, whereas there are unnecessary hyphens in the names used by PHPECC.
+
+https://tools.ietf.org/html/rfc5656
