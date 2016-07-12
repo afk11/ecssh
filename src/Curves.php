@@ -12,7 +12,7 @@ class Curves
      */
     public static function listAll()
     {
-        return ['nistp256', 'nistp384', 'nistp521'];
+        return [NistCurve::NAME_P256, NistCurve::NAME_P384, NistCurve::NAME_P521];
     }
 
     /**
