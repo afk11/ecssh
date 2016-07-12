@@ -18,7 +18,7 @@ use Mdanter\Ecc\Serializer\PrivateKey\DerPrivateKeySerializer;
 use Mdanter\Ecc\Serializer\PublicKey\DerPublicKeySerializer;
 use Mdanter\Ecc\Serializer\Util\CurveOidMapper;
 
-class PKCS8Serializer
+class Pkcs8Serializer
 {
     const VERSION = 1;
 

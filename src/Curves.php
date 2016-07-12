@@ -3,6 +3,7 @@
 namespace Afk11\EcSSH;
 
 use Mdanter\Ecc\Curves\CurveFactory;
+use Mdanter\Ecc\Curves\NistCurve;
 
 class Curves
 {
@@ -21,9 +22,9 @@ class Curves
     public static function curve($curveName)
     {
         switch ($curveName) {
-            case 'nistp256':
-            case 'nistp384':
-            case 'nistp521':
+            case NistCurve::NAME_P256:
+            case NistCurve::NAME_P384:
+            case NistCurve::NAME_P521:
                 return CurveFactory::getCurveByName($curveName);
             default:
                 throw new \InvalidArgumentException('Unknown or unsupported curve');
@@ -37,11 +38,9 @@ class Curves
     public static function generator($curveName)
     {
         switch ($curveName) {
-            case 'nistp256':
-
-            case 'nistp384':
-
-            case 'nistp521':
+            case NistCurve::NAME_P256:
+            case NistCurve::NAME_P384:
+            case NistCurve::NAME_P521:
                 return CurveFactory::getGeneratorByName($curveName);
             default:
                 throw new \InvalidArgumentException('Unknown or unsupported generator');
