@@ -3,11 +3,11 @@
 namespace Afk11\EcSSH\Pkcs8;
 
 
-use Afk11\EcSSH\Pkcs5\Cipher\CipherParamsInterface;
-use Afk11\EcSSH\Pkcs5\Digest\DigestParamsInterface;
+use Afk11\Pkcs5\Cipher\CipherParamsInterface;
+use Afk11\Pkcs5\Digest\DigestParamsInterface;
 use Mdanter\Ecc\Crypto\Key\PrivateKey;
 use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
-use Mdanter\Ecc\Math\MathAdapterInterface;
+use Mdanter\Ecc\Math\GmpMathInterface;
 
 class Pkcs8PrivateKey extends PrivateKey
 {
@@ -23,12 +23,12 @@ class Pkcs8PrivateKey extends PrivateKey
 
     /**
      * Pkcs8PrivateKey constructor.
-     * @param MathAdapterInterface $math
+     * @param GmpMathInterface $math
      * @param DigestParamsInterface $kdfParams
      * @param CipherParamsInterface $cipherParams
      * @param PrivateKeyInterface $privateKey
      */
-    public function __construct(MathAdapterInterface $math, DigestParamsInterface $kdfParams, CipherParamsInterface $cipherParams, PrivateKeyInterface $privateKey)
+    public function __construct(GmpMathInterface $math, DigestParamsInterface $kdfParams, CipherParamsInterface $cipherParams, PrivateKeyInterface $privateKey)
     {
         $this->kdfParams = $kdfParams;
         $this->cipherParams = $cipherParams;

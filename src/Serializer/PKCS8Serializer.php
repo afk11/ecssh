@@ -3,17 +3,17 @@
 namespace Afk11\EcSSH\Serializer;
 
 
-use Afk11\EcSSH\Pkcs5\Cipher\Crypter;
-use Afk11\EcSSH\Pkcs5\Digest\Digester;
-use Afk11\EcSSH\Pkcs5\Serializer\Pkcs5v2Serializer;
 use Afk11\EcSSH\Pkcs8\Pkcs8PrivateKey;
+use Afk11\Pkcs5\Cipher\Crypter;
+use Afk11\Pkcs5\Digest\Digester;
+use Afk11\Pkcs5\Serializer\Pkcs5v2Serializer;
 use FG\ASN1\Universal\Integer;
 use FG\ASN1\Universal\ObjectIdentifier;
 use FG\ASN1\Universal\OctetString;
 use FG\ASN1\Universal\Sequence;
 use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
+use Mdanter\Ecc\Math\GmpMathInterface;
 use Mdanter\Ecc\Math\MathAdapterFactory;
-use Mdanter\Ecc\Math\MathAdapterInterface;
 use Mdanter\Ecc\Serializer\PrivateKey\DerPrivateKeySerializer;
 use Mdanter\Ecc\Serializer\PublicKey\DerPublicKeySerializer;
 use Mdanter\Ecc\Serializer\Util\CurveOidMapper;
@@ -28,7 +28,7 @@ class PKCS8Serializer
     private $serializer;
 
     /**
-     * @var \Mdanter\Ecc\Math\DebugDecorator|MathAdapterInterface
+     * @var \Mdanter\Ecc\Math\DebugDecorator|GmpMathInterface
      */
     private $adapter;
     
@@ -45,9 +45,9 @@ class PKCS8Serializer
     /**
      * PKCS8Serializer constructor.
      * @param DerPrivateKeySerializer|null $serializer
-     * @param MathAdapterInterface|null $adapter
+     * @param GmpMathInterface|null $adapter
      */
-    public function __construct(DerPrivateKeySerializer $serializer = null, MathAdapterInterface $adapter = null)
+    public function __construct(DerPrivateKeySerializer $serializer = null, GmpMathInterface $adapter = null)
     {
         $this->serializer = $serializer ?: new DerPrivateKeySerializer();
         $this->adapter = $adapter ?: MathAdapterFactory::getAdapter();
@@ -96,8 +96,14 @@ class PKCS8Serializer
         );
     }
 
+    /**
+     * @param Pkcs8PrivateKey $privateKey
+     * @param string $password
+     * @return Sequence
+     */
     public function serialize(Pkcs8PrivateKey $privateKey, $password)
     {
-
+        $info = $this->getEncryptedPrivateKeyInfo($privateKey, $password);
+        return $info;
     }
 }
