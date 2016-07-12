@@ -12,7 +12,8 @@
     }
   ],
   "require": {
-    "mdanter/ecc": "~0.3",
+    "mdanter/ecc": "~0.4",
+    "afk11/pkcs5": "0.0.*",
     "paragonie/random_compat": "~2.0"
   },
   "require-dev": {

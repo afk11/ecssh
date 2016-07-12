@@ -81,7 +81,7 @@ JAMKCgCmEqew2Wd7KobexGVF6tmiHn4+GWTqg7rq3EA=
 
         /** @var GeneratorPoint $generator */
         $generator = Curves::generator($curveName);
-        $privateKey = $generator->getPrivateKeyFrom($multiplier);
+        $privateKey = $generator->getPrivateKeyFrom(gmp_init($multiplier, 10));
 
         $cryptKey = new EncryptedPrivateKey($privateKey, $method, $iv);
         $this->assertSame($privateKey, $cryptKey->getKey());
@@ -106,7 +106,7 @@ JAMKCgCmEqew2Wd7KobexGVF6tmiHn4+GWTqg7rq3EA=
 
         /** @var GeneratorPoint $generator */
         $generator = Curves::generator('nistp256');
-        $privateKey = $generator->getPrivateKeyFrom(1923123);
+        $privateKey = $generator->getPrivateKeyFrom(gmp_init(1923123));
 
         $cryptKey = new EncryptedPrivateKey($privateKey, $method, $iv);
         $this->assertSame($privateKey, $cryptKey->getKey());
@@ -220,7 +220,7 @@ JAMKCgCmEqew2Wd7KobexGVF6tmiHn4+GWTqg7rq3EA=
     {
         /** @var GeneratorPoint $generator */
         $generator = Curves::generator('nistp256');
-        $privateKey = $generator->getPrivateKeyFrom('1');
+        $privateKey = $generator->getPrivateKeyFrom(gmp_init('1'));
 
         $method = 'not-a-method';
         $iv = random_bytes(16);

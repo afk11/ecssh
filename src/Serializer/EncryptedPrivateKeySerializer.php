@@ -5,6 +5,14 @@ namespace Afk11\EcSSH\Serializer;
 use Afk11\EcSSH\EncryptedPrivateKey;
 use Mdanter\Ecc\Serializer\PrivateKey\DerPrivateKeySerializer;
 
+/**
+ * Class EncryptedPrivateKeySerializer
+ * Implements same structure as DerPrivateKeySerializer (rfc5915)
+ * using RFC1421 headers
+ *
+ * @link https://tools.ietf.org/html/rfc1421
+ * @package Afk11\EcSSH\Serializer
+ */
 class EncryptedPrivateKeySerializer
 {
     /**

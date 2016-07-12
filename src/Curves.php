@@ -22,11 +22,9 @@ class Curves
     {
         switch ($curveName) {
             case 'nistp256':
-                return CurveFactory::getCurveByName('nist-p256');
             case 'nistp384':
-                return CurveFactory::getCurveByName('nist-p384');
             case 'nistp521':
-                return CurveFactory::getCurveByName('nist-p521');
+                return CurveFactory::getCurveByName($curveName);
             default:
                 throw new \InvalidArgumentException('Unknown or unsupported curve');
         }
@@ -40,11 +38,11 @@ class Curves
     {
         switch ($curveName) {
             case 'nistp256':
-                return CurveFactory::getGeneratorByName('nist-p256');
+
             case 'nistp384':
-                return CurveFactory::getGeneratorByName('nist-p384');
+
             case 'nistp521':
-                return CurveFactory::getGeneratorByName('nist-p521');
+                return CurveFactory::getGeneratorByName($curveName);
             default:
                 throw new \InvalidArgumentException('Unknown or unsupported generator');
         }

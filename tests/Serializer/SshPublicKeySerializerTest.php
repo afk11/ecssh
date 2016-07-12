@@ -30,7 +30,7 @@ class SshPublicKeySerializerTest extends AbstractTest
     {
         /** @var GeneratorPoint $generator */
         $generator = Curves::generator($curveName);
-        $privateKey = $generator->getPrivateKeyFrom($multiplier);
+        $privateKey = $generator->getPrivateKeyFrom(gmp_init($multiplier, 10));
         $public = $privateKey->getPublicKey();
 
         $adapter = EccFactory::getAdapter();

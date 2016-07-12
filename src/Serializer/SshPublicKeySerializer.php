@@ -5,10 +5,15 @@ namespace Afk11\EcSSH\Serializer;
 use Afk11\EcSSH\Curves;
 use Mdanter\Ecc\Crypto\Key\PublicKey;
 use Mdanter\Ecc\Crypto\Key\PublicKeyInterface;
-use Mdanter\Ecc\Curves\CurveFactory;
-use Mdanter\Ecc\Math\MathAdapterInterface;
+use Mdanter\Ecc\Math\GmpMathInterface;
 use Mdanter\Ecc\Serializer\Point\UncompressedPointSerializer;
 
+/**
+ * Class SshPublicKeySerializer
+ * Public key formatting according to https://tools.ietf.org/rfc/rfc5656
+ *
+ * @package Afk11\EcSSH\Serializer
+ */
 class SshPublicKeySerializer
 {
     /**
@@ -17,15 +22,16 @@ class SshPublicKeySerializer
     private $pointSerializer;
 
     /**
-     * @var MathAdapterInterface
+     * @var GmpMathInterface
      */
     private $math;
 
     /**
      * SshPublicKeySerializer constructor.
+     * @param GmpMathInterface $math
      * @param UncompressedPointSerializer $pointSerializer
      */
-    public function __construct(MathAdapterInterface $math, UncompressedPointSerializer $pointSerializer)
+    public function __construct(GmpMathInterface $math, UncompressedPointSerializer $pointSerializer)
     {
         $this->math = $math;
         $this->pointSerializer = $pointSerializer;

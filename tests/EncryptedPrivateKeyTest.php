@@ -9,7 +9,7 @@ class EncryptedPrivateKeyTest extends AbstractTest
 {
     public function testCreate()
     {
-        $privateKey = CurveFactory::getGeneratorByName('nist-p256')->getPrivateKeyFrom(100);
+        $privateKey = CurveFactory::getGeneratorByName('nistp256')->getPrivateKeyFrom(gmp_init(100));
         $iv = random_bytes(16);
         $method = 'AES-128-CBC';
         $key = new EncryptedPrivateKey($privateKey, $method, $iv);
@@ -24,7 +24,7 @@ class EncryptedPrivateKeyTest extends AbstractTest
      */
     public function testInvalidCipher()
     {
-        $privateKey = CurveFactory::getGeneratorByName('nist-p256')->getPrivateKeyFrom(100);
+        $privateKey = CurveFactory::getGeneratorByName('nistp256')->getPrivateKeyFrom(gmp_init(100));
         $iv = random_bytes(16);
         $method = 'not-a-known-cipher';
         new EncryptedPrivateKey($privateKey, $method, $iv);

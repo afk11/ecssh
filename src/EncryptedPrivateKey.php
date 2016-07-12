@@ -3,6 +3,7 @@
 namespace Afk11\EcSSH;
 
 use Mdanter\Ecc\Crypto\Key\PrivateKeyInterface;
+use Mdanter\Ecc\Util\BinaryString;
 
 class EncryptedPrivateKey
 {
@@ -71,6 +72,6 @@ class EncryptedPrivateKey
     {
         return $this->getMethod() === $that->getMethod()
             && $this->getIv() === $that->getIv()
-            && $this->getKey()->getSecret() === $that->getKey()->getSecret();
+            && BinaryString::constantTimeCompare(gmp_strval($this->getKey()->getSecret(), 10), gmp_strval($that->getKey()->getSecret(), 10));
     }
 }
