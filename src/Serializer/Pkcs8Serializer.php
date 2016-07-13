@@ -69,10 +69,10 @@ class Pkcs8Serializer
                 new ObjectIdentifier(DerPublicKeySerializer::X509_ECDSA_OID),
                 CurveOidMapper::getCurveOid($key->getPoint()->getCurve())
             ),
-            new OctetString(unpack("H*", $keyData)[1])
+            new OctetString(bin2hex($keyData))
         );
 
-        return $privateKeyInfo->getBinary();
+        return $privateKeyInfo;
     }
 
     /**
@@ -84,11 +84,12 @@ class Pkcs8Serializer
     {
         $digestParams = $privateKey->getKdfParams();
         $cipherParams = $privateKey->getCipherParams();
-        $pkcs5Info = $this->pkcs5->serialize($digestParams, $cipherParams);
+        $pkcs5Info = $this->pkcs5->getPkcs5Data($digestParams, $cipherParams);
 
         $encKey = $this->digester->digest($password, $digestParams);
         $data = $this->getPrivateKeyInfo($privateKey);
-        $cipherText = $this->crypter->encrypt($data, $encKey, $cipherParams);
+
+        $cipherText = $this->crypter->encrypt($data->getBinary(), $encKey, $cipherParams);
 
         return new Sequence(
             $pkcs5Info,
@@ -103,7 +104,6 @@ class Pkcs8Serializer
      */
     public function serialize(Pkcs8PrivateKey $privateKey, $password)
     {
-        $info = $this->getEncryptedPrivateKeyInfo($privateKey, $password);
-        return $info;
+        return $this->getEncryptedPrivateKeyInfo($privateKey, $password)->getBinary();
     }
 }
